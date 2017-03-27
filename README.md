@@ -82,7 +82,7 @@ docker ps
 
 Once you have both containers running, they should connect to each other and should both turn green (or yellow).
 
-You can now create identities and send messages between the two nodes.  If you like you can spawn additional instances of the Docker container and add mroe nodes to your network!
+You can now create identities and send messages between the two nodes.  If you like you can spawn additional instances of the Docker container and add more nodes to your network!
 
 
 

@@ -18,16 +18,14 @@ bob_rm:
 	-docker rm -f bob
 
 alice_daemon: 
-	docker exec alice cp /home/bitmsg/.config/PyBitmessage/keys.dat.8444 /home/bitmsg/.config/PyBitmessage/keys.dat
 	docker exec alice $(RUN_DAEMON) &
 
 alice_shell: alice_rm
-	$(DOCKER_ALICE) -v $(BITMSG_SRC):$(BITMSG_SRC) $(IMG) $(RUN_SHELL)
+	$(DOCKER_ALICE) -v $(BITMSG_SRC):$(BITMSG_SRC) -v /home/osboxes/Projects/bitmessage-dev/config-alice/:/home/bitmsg/.config/PyBitmessage/ $(IMG) $(RUN_SHELL)
 
 bob_daemon: 
-	docker exec bob cp /home/bitmsg/.config/PyBitmessage/keys.dat.8555 /home/bitmsg/.config/PyBitmessage/keys.dat
 	docker exec bob $(RUN_DAEMON) &
 
 bob_shell: bob_rm
-	$(DOCKER_BOB) -v $(BITMSG_SRC):$(BITMSG_SRC) $(IMG) $(RUN_SHELL)
+	$(DOCKER_BOB) -v $(BITMSG_SRC):$(BITMSG_SRC) -v /home/osboxes/Projects/bitmessage-dev/config-bob/:/home/bitmsg/.config/PyBitmessage/ $(IMG) $(RUN_SHELL)
 
