@@ -11,6 +11,10 @@ RUN_SHELL=bash
 build-base:
 	docker build -t anon-sol/bitmsg-dev bm-docker
 
+build-config:
+	mkdir /home/osboxes/Projects/PyB-config
+	cp -r config* /home/osboxes/Projects/PyB-config/
+
 alice_rm:
 	-docker rm -f alice
 
@@ -21,11 +25,11 @@ alice_daemon:
 	docker exec alice $(RUN_DAEMON) &
 
 alice_shell: alice_rm
-	$(DOCKER_ALICE) -v $(BITMSG_SRC):$(BITMSG_SRC) -v /home/osboxes/Projects/bitmessage-dev/config-alice/:/home/bitmsg/.config/PyBitmessage/ $(IMG) $(RUN_SHELL)
+	$(DOCKER_ALICE) -v $(BITMSG_SRC):$(BITMSG_SRC) -v /home/osboxes/Projects/PyB-config/config-alice/:/home/bitmsg/.config/PyBitmessage/ $(IMG) $(RUN_SHELL)
 
 bob_daemon: 
 	docker exec bob $(RUN_DAEMON) &
 
 bob_shell: bob_rm
-	$(DOCKER_BOB) -v $(BITMSG_SRC):$(BITMSG_SRC) -v /home/osboxes/Projects/bitmessage-dev/config-bob/:/home/bitmsg/.config/PyBitmessage/ $(IMG) $(RUN_SHELL)
+	$(DOCKER_BOB) -v $(BITMSG_SRC):$(BITMSG_SRC) -v /home/osboxes/Projects/PyB-config/config-bob/:/home/bitmsg/.config/PyBitmessage/ $(IMG) $(RUN_SHELL)
 
